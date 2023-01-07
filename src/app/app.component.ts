@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
@@ -35,27 +35,40 @@ export class AppComponent{
     this.productsCollection.add(item);
   }
 
+
   form = new FormGroup({
-    product: new FormControl(''),
-    brand: new FormControl(''),
-    detail: new FormControl(''),
-    shop: new FormControl(''),
-    volume: new FormControl(''),
-    price: new FormControl(''),
-    kgPrice: new FormControl(''),
+    product: new FormControl(null, Validators.required),
+    brand: new FormControl(null, Validators.required),
+    detail: new FormControl(null, Validators.required),
+    shop: new FormControl(null, Validators.required),
+    volume: new FormControl(null, Validators.required),
+    price: new FormControl(null, Validators.required),
+    kgPrice: new FormControl(null, Validators.required),
   })
+
+
+
 
   onProductCreation(e: any) {
     e.preventDefault();
     console.log(this.form.value);
-    this.addItem(this.form.value)
+    this.addItem(this.form.value);
   }
+
+
 
   ngOnInit() {
     // this.item$.subscribe(res => {
     //   console.log(res);
     //   this.products = res;
     // })
+    this.form.controls["product"].addValidators([Validators.required, Validators.minLength(2), Validators.maxLength(30)]);
+    this.form.controls["brand"].addValidators([Validators.required, Validators.minLength(2), Validators.maxLength(20)]);
+    this.form.controls["detail"].addValidators([Validators.required, Validators.minLength(2), Validators.maxLength(30)]);
+    this.form.controls["shop"].addValidators([Validators.required, Validators.minLength(2), Validators.maxLength(20)]);
+    this.form.controls["volume"].addValidators([Validators.required, Validators.minLength(2), Validators.maxLength(5)]);
+    this.form.controls["price"].addValidators([Validators.required, Validators.minLength(1), Validators.maxLength(5)]);
+    this.form.controls["kgPrice"].addValidators([Validators.required, Validators.minLength(1), Validators.maxLength(5)]);
 
   }
 }

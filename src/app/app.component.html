@@ -28,14 +28,14 @@
       <span>Price/kg</span>
       <input class="p-inputtext-sm" formControlName="kgPrice" type="number" pInputText
     /></label>
-    <button class="p-button-sm" pButton type="submit">Submit</button>
+    <button [disabled]="!form.valid" class="p-button-sm" pButton type="submit">Submit</button>
   </form>
 </p-card>
 
 <br>
 
 <p-card>
-  <p-table sortMode="multiple" styleClass="p-datatable-striped p-datatable-sm" [value]="products" [tableStyle]="{'min-width': '50rem'}">
+  <p-table sortMode="multiple" styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="products" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="product">Product</th>
