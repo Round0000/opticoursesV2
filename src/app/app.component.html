@@ -1,6 +1,37 @@
-<ngx-barcode-scanner (valueChange)="onValueChanges($event)" [(value)]="value" [codes]="['code_128', 'ean', 'upc', 'upc_e', 'ean_8']" [errorThreshold]="0.1" (exception)="onError($event)"></ngx-barcode-scanner>
-<div style="display: flex; justify-content: space-between; margin: 5% auto">
-  <button (click)="onStartButtonPress()">Start</button>
-  <button (click)="onStopButtonPress()">Stop</button>
-</div>
-<p>{{ value }}</p>
+<p-card
+  ><form [formGroup]="form" (ngSubmit)="onProductCreation($event)">
+    <label>
+      <span>Product</span>
+      <input class="p-inputtext-sm" formControlName="product" type="text" pInputText />
+    </label>
+    <label>
+      <span>Brand</span>
+      <input class="p-inputtext-sm" formControlName="brand" type="text" pInputText
+    /></label>
+    <label>
+      <span>Detail</span>
+      <input class="p-inputtext-sm" formControlName="detail" type="text" pInputText
+    /></label>
+    <label>
+      <span>Shop</span>
+      <input class="p-inputtext-sm" formControlName="shop" type="text" pInputText
+    /></label>
+    <label>
+      <span>Volume</span>
+      <input class="p-inputtext-sm" formControlName="volume" type="text" pInputText
+    /></label>
+    <label>
+      <span>Price</span>
+      <input class="p-inputtext-sm" formControlName="price" type="number" pInputText
+    /></label>
+    <label>
+      <span>Price/kg</span>
+      <input class="p-inputtext-sm" formControlName="kgPrice" type="number" pInputText
+    /></label>
+    <button class="p-button-sm" pButton type="submit">Submit</button>
+  </form>
+</p-card>
+
+<ul>
+  <li *ngFor="let product of items">{{ product.product }}</li>
+</ul>

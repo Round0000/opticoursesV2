@@ -1,52 +1,58 @@
-import { Component } from '@angular/core';
-import {NgxBarcodeScannerService} from "@eisberg-labs/ngx-barcode-scanner";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms'
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
+interface Product {
+  product: string,
+  brand: string,
+  detail: string,
+  shop: string,
+  volume: string,
+  price: number,
+  kgPrice: number
+};
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'opticoursesV2';
-
-  constructor(
-    public service: NgxBarcodeScannerService
- ) {
-   //Do constructor things...
- }
-
-
-  value: any;
-
-  quaggaConfig = {};
-
-  onStartButtonPress() {
-    this.service.start(this.quaggaConfig, 0.1)
+export class AppComponent{
+  private itemsCollection: AngularFirestoreCollection<Product>;
+  products$: Observable<Product[]>;
+  items: any;
+  constructor(public afs: AngularFirestore) {
+    this.itemsCollection = afs.collection<Product>('products');
+    this.products$ = this.itemsCollection.valueChanges();
+    this.products$.subscribe(res => this.items = res)
   }
 
-  onValueChanges(detectedValue: string) {
-    console.log("Found this: " + detectedValue)
+  addItem(item: any) {
+    this.itemsCollection.add(item);
   }
 
-  onStopButtonPress() {
-    this.service.stop()
-  }
+  form = new FormGroup({
+    product: new FormControl(''),
+    brand: new FormControl(''),
+    detail: new FormControl(''),
+    shop: new FormControl(''),
+    volume: new FormControl(''),
+    price: new FormControl(''),
+    kgPrice: new FormControl(''),
+  })
 
-  onError(e: any) {
-    console.log(e)
+  onProductCreation(e: any) {
+    e.preventDefault();
+    console.log(this.form.value);
+    this.addItem(this.form.value)
   }
 
   ngOnInit() {
-    if (!("BarcodeDetector" in window)) {
-      console.log("Barcode Detector is not supported by this browser.");
-    } else {
-      console.log("Barcode Detector supported!");
+    // this.item$.subscribe(res => {
+    //   console.log(res);
+    //   this.products = res;
+    // })
 
-      // create new detector
-      // const barcodeDetector = new BarcodeDetector({
-      //   formats: ["code_39", "codabar", "ean_13"],
-      // });
-    }
   }
 }
