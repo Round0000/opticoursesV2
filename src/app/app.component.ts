@@ -19,17 +19,20 @@ interface Product {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent{
-  private itemsCollection: AngularFirestoreCollection<Product>;
-  products$: Observable<Product[]>;
-  items: any;
+  private productsCollection: AngularFirestoreCollection<Product>;
+  data$: Observable<Product[]>;
+  products: any;
   constructor(public afs: AngularFirestore) {
-    this.itemsCollection = afs.collection<Product>('products');
-    this.products$ = this.itemsCollection.valueChanges();
-    this.products$.subscribe(res => this.items = res)
+    this.productsCollection = afs.collection<Product>('products');
+    this.data$ = this.productsCollection.valueChanges();
+    this.data$.subscribe(res => {
+      console.log('DATA', res);
+      this.products = res;
+    })
   }
 
   addItem(item: any) {
-    this.itemsCollection.add(item);
+    this.productsCollection.add(item);
   }
 
   form = new FormGroup({
