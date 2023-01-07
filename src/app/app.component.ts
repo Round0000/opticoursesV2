@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'opticoursesV2';
+
+
+  scanCompleteHandler(e: any) {
+    console.log(e)
+  }
+
 }
