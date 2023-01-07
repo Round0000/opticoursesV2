@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { NgxBarcodeScannerModule } from '@eisberg-labs/ngx-barcode-scanner';
 
 
 @NgModule({
@@ -14,7 +13,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ZXingScannerModule,
+    NgxBarcodeScannerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
