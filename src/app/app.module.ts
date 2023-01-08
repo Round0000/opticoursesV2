@@ -11,6 +11,10 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
+import {DataViewModule} from 'primeng/dataview';
+import { TagModule } from 'primeng/tag';
+
+
 
 // Firestore
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
@@ -29,6 +33,8 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
     InputTextModule,
     CardModule,
     TableModule,
+    DataViewModule,
+    TagModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
   ],

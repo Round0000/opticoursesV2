@@ -10,7 +10,9 @@ interface Product {
   shop: string,
   volume: string,
   price: number,
-  kgPrice: number
+  kgPrice: number,
+  picture: string,
+  id: string
 };
 
 @Component({
@@ -24,7 +26,8 @@ export class AppComponent{
   products: any;
   constructor(public afs: AngularFirestore) {
     this.productsCollection = afs.collection<Product>('products');
-    this.data$ = this.productsCollection.valueChanges();
+    console.log(this.productsCollection)
+    this.data$ = this.productsCollection.valueChanges({ idField: 'id', created_at: 'created_at' });
     this.data$.subscribe(res => {
       console.log('DATA', res);
       this.products = res;
@@ -35,15 +38,23 @@ export class AppComponent{
     this.productsCollection.add(item);
   }
 
+  removeItem(id: string) {
+    this.productsCollection.doc(id).delete()
+  }
+
+  editProduct(id: string) {
+    console.log(id)
+  }
 
   form = new FormGroup({
-    product: new FormControl(null, Validators.required),
-    brand: new FormControl(null, Validators.required),
-    detail: new FormControl(null, Validators.required),
-    shop: new FormControl(null, Validators.required),
-    volume: new FormControl(null, Validators.required),
-    price: new FormControl(null, Validators.required),
-    kgPrice: new FormControl(null, Validators.required),
+    product: new FormControl(null),
+    brand: new FormControl(null),
+    detail: new FormControl(null),
+    shop: new FormControl(null),
+    volume: new FormControl(null),
+    price: new FormControl(null),
+    kgPrice: new FormControl(null),
+    picture: new FormControl(null),
   })
 
 
@@ -53,6 +64,7 @@ export class AppComponent{
     e.preventDefault();
     console.log(this.form.value);
     this.addItem(this.form.value);
+    this.form.reset();
   }
 
 

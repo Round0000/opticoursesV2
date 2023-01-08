@@ -28,6 +28,10 @@
       <span>Price/kg</span>
       <input class="p-inputtext-sm" formControlName="kgPrice" type="number" pInputText
     /></label>
+    <label>
+      <span>Picture</span>
+      <input class="p-inputtext-sm" formControlName="picture" type="text" pInputText
+    /></label>
     <button [disabled]="!form.valid" class="p-button-sm" pButton type="submit">Submit</button>
   </form>
 </p-card>
@@ -35,7 +39,29 @@
 <br>
 
 <p-card>
-  <p-table sortMode="multiple" styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="products" [tableStyle]="{'min-width': '50rem'}">
+  <p-dataView [value]="products">
+    <ng-template let-product pTemplate="listItem">
+      <p-card>
+            <div class="product-card">
+              <div class="product-picture">
+                <img [attr.src]="product.picture" alt="">
+              </div>
+              <p class="product-name">{{product.product}} {{product.brand}}</p>
+              <p class="product-detail">{{product.detail}}</p>
+              <p-tag class="product-shop">{{product.shop}}</p-tag>
+              <p class="product-volume">{{product.volume}}</p>
+              <p class="product-price"><strong>{{product.price}}</strong> € | <em>{{product.kgPrice}}</em> €</p>
+            </div>
+          </p-card>
+          <br>
+        </ng-template>
+  </p-dataView>
+
+  <br>
+  <br>
+  <br>
+
+  <p-table [loading]="!this.products" sortMode="multiple" styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="products" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="product">Product</th>
@@ -45,6 +71,7 @@
             <th pSortableColumn="volume">Volume</th>
             <th pSortableColumn="price">Price</th>
             <th pSortableColumn="kgPrice">Price/kg</th>
+            <th>Actions</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
@@ -56,7 +83,14 @@
             <td>{{product.volume}}</td>
             <td>{{product.price}}</td>
             <td>{{product.kgPrice}}</td>
+            <td>
+              <button pButton pRipple icon="pi pi-pencil" class="p-button-sm p-button-text p-button-success mr-2" (click)="editProduct(product.id)"></button>
+              <button pButton pRipple icon="pi pi-clone" class="p-button-sm p-button-text p-button-info" (click)="addItem(product)"></button>
+              <button pButton pRipple icon="pi pi-trash" class="p-button-sm p-button-text p-button-warning" (click)="removeItem(product.id)"></button>
+            </td>
         </tr>
     </ng-template>
   </p-table>
 </p-card>
+
+

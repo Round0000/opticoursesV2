@@ -16,5 +16,55 @@ form {
   button {
     align-self: end;
     justify-self: end;
+    grid-column: 1 / -1;
+  }
+}
+
+.product-card {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+
+  p {
+    margin: 0;
+  }
+
+
+
+  .product-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .product-shop {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .product-volume {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .product-price {
+    grid-column: 3;
+    grid-row: 3;
+    justify-self: end;
+    font-size: 1.2rem;
+  }
+
+  .product-picture {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    width: 5em;
+    height: 5em;
+    margin-right: 1em;
+
+    img {
+      max-width: 100%;
+    }
   }
 }
