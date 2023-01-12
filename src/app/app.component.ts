@@ -63,7 +63,8 @@ export class AppComponent{
   onProductCreation(e: any) {
     e.preventDefault();
     console.log(this.form.value);
-    this.addItem(this.form.value);
+    const value = this.form.value;
+    this.addItem(value);
     this.form.reset();
   }
 

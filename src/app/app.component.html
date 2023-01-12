@@ -50,7 +50,7 @@
               <p class="product-detail">{{product.detail}}</p>
               <p-tag class="product-shop">{{product.shop}}</p-tag>
               <p class="product-volume">{{product.volume}}</p>
-              <p class="product-price"><strong>{{product.price}}</strong> € | <em>{{product.kgPrice}}</em> €</p>
+              <p class="product-price"><strong>{{product.price | currency:'EUR' }}</strong> | <em>{{product.kgPrice | currency:'EUR' }}</em></p>
             </div>
           </p-card>
           <br>

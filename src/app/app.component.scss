@@ -32,10 +32,11 @@ form {
 
   .product-name {
     font-weight: bold;
-    font-size: 1.2rem;
     grid-column: 2;
     grid-row: 1;
     justify-self: start;
+    line-height: 1;
+    margin-bottom: .25em;
   }
 
   .product-shop {
@@ -46,25 +47,29 @@ form {
 
   .product-volume {
     grid-column: 2;
-    grid-row: 3;
+    grid-row: 4;
+    font-style: italic;
   }
 
   .product-price {
     grid-column: 3;
-    grid-row: 3;
+    grid-row: 4;
     justify-self: end;
     font-size: 1.2rem;
   }
 
   .product-picture {
     grid-column: 1;
-    grid-row: 1 / 4;
-    width: 5em;
-    height: 5em;
+    grid-row: 1 / 5;
+    width: 6em;
+    height: 6em;
     margin-right: 1em;
+    box-shadow: inset 1px 1px 2px #0004, 1px 1px 1px #0001;
+    padding: .5em;
 
     img {
       max-width: 100%;
     }
   }
 }
+

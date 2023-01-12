@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+
+.p-dataview-content .p-card-body {
+  padding: .5em !important;
+
+  .p-card-content {
+    padding: 0;
+    padding-right: .25em;
+  }
+}
