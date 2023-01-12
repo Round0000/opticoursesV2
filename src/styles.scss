@@ -1,9 +1,18 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-.p-dataview-content .p-card-body {
-  padding: .5em !important;
+.p-dataview-content {
+  background-color: transparent !important;
 
-  .p-card-content {
-    padding: 0;
-    padding-right: .25em;
+  .p-card-body {
+    padding: .5em !important;
+
+    .p-card-content {
+      padding: 0;
+      padding-right: .25em;
+    }
   }
 }
