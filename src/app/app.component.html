@@ -1,3 +1,7 @@
+<header>
+  <h1>Opticourses v2</h1>
+</header>
+
 <div class="wrapper">
   <p-card *ngIf="currentTab === 'form'"
   ><form [formGroup]="form" (ngSubmit)="onProductCreation($event)">
@@ -44,11 +48,13 @@
               <div class="product-picture">
                 <img [attr.src]="product.picture" alt="">
               </div>
-              <p class="product-name">{{product.product}} {{product.brand}}</p>
+              <div class="product-data">
+                <p class="product-name">{{product.product}} {{product.brand}}</p>
               <p class="product-detail">{{product.detail}}</p>
               <p-tag class="product-shop">{{product.shop}}</p-tag>
               <p class="product-volume">{{product.volume}}</p>
               <p class="product-price"><strong>{{product.price | currency:'EUR' }}</strong> | <em>{{product.kgPrice | currency:'EUR' }}</em></p>
+              </div>
             </div>
           </p-card>
         </ng-template>
@@ -92,8 +98,8 @@
 
 <nav id="navbar">
   <ul>
-    <li><button [class]="{ activeTab: currentTab === 'form' }" (click)="currentTab = 'form'">New</button></li>
-    <li><button [class]="{ activeTab: currentTab === 'list' }" (click)="currentTab = 'list'">List</button></li>
-    <li><button [class]="{ activeTab: currentTab === 'table' }" (click)="currentTab = 'table'">Table</button></li>
+    <li><button [class]="{ activeTab: currentTab === 'form' }" (click)="currentTab = 'form'"><i class="pi pi-plus"></i><span>New</span></button></li>
+    <li><button [class]="{ activeTab: currentTab === 'list' }" (click)="currentTab = 'list'"><i class="pi pi-list"></i><span>List</span></button></li>
+    <li><button [class]="{ activeTab: currentTab === 'table' }" (click)="currentTab = 'table'"><i class="pi pi-table"></i><span>Table</span></button></li>
   </ul>
 </nav>

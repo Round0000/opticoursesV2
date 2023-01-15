@@ -4,11 +4,15 @@
   padding: 0;
 }
 
+body {
+  font-family: Roboto, sans-serif;
+}
+
 .p-dataview-content {
   background-color: transparent !important;
 
   .p-card-body {
-    padding: .5em !important;
+    padding: 0 !important;
 
     .p-card-content {
       padding: 0;
