@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <p-card
+  <p-card *ngIf="currentTab === 'form'"
   ><form [formGroup]="form" (ngSubmit)="onProductCreation($event)">
     <label>
       <span>Product</span>
@@ -37,9 +37,7 @@
   </form>
 </p-card>
 
-<br>
-
-  <p-dataView [value]="products">
+  <p-dataView *ngIf="currentTab === 'list'" [value]="products">
     <ng-template let-product pTemplate="listItem">
       <p-card>
             <div class="product-card">
@@ -56,11 +54,8 @@
         </ng-template>
   </p-dataView>
 
-  <br>
-  <br>
-  <br>
 
-  <p-table [loading]="!this.products" sortMode="multiple" styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="products" [tableStyle]="{'min-width': '50rem'}">
+  <p-table *ngIf="currentTab === 'table'" [loading]="!this.products" sortMode="multiple" styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [value]="products" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="product">Product</th>
@@ -80,8 +75,8 @@
             <td>{{product.detail}}</td>
             <td>{{product.shop}}</td>
             <td>{{product.volume}}</td>
-            <td>{{product.price}}</td>
-            <td>{{product.kgPrice}}</td>
+            <td>{{product.price | currency:'EUR' }}</td>
+            <td>{{product.kgPrice | currency:'EUR' }}</td>
             <td>
               <button pButton pRipple icon="pi pi-pencil" class="p-button-sm p-button-text p-button-success mr-2" (click)="editProduct(product.id)"></button>
               <button pButton pRipple icon="pi pi-clone" class="p-button-sm p-button-text p-button-info" (click)="addItem(product)"></button>
@@ -94,3 +89,11 @@
 
 
 </div>
+
+<nav id="navbar">
+  <ul>
+    <li><button [class]="{ activeTab: currentTab === 'form' }" (click)="currentTab = 'form'">New</button></li>
+    <li><button [class]="{ activeTab: currentTab === 'list' }" (click)="currentTab = 'list'">List</button></li>
+    <li><button [class]="{ activeTab: currentTab === 'table' }" (click)="currentTab = 'table'">Table</button></li>
+  </ul>
+</nav>

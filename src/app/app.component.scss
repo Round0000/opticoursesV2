@@ -81,3 +81,35 @@ form {
   }
 }
 
+#navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #eee;
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+
+    li {
+      flex: 1;
+      display: flex;
+
+      button {
+        all: unset;
+        flex: 1;
+        border: 1px solid #eee;
+        text-align: center;
+        padding: .75em 1em;
+        font-family: Roboto, sans-serif;
+
+        &.activeTab {
+          background-color: #fff;
+        }
+      }
+    }
+
+  }
+}

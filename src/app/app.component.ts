@@ -34,6 +34,8 @@ export class AppComponent{
     })
   }
 
+  currentTab = 'list';
+
   addItem(item: any) {
     this.productsCollection.add(item);
   }
